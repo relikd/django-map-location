@@ -6,7 +6,7 @@ with open('README.md', 'r') as f:
 setuptools.setup(
     name='django-map-location',
     description='Django Map-Location Field',
-    version='0.9',
+    version='0.9.1',
     author='relikd',
     license='MIT',
     long_description=long_description,
