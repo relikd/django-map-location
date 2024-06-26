@@ -17,6 +17,7 @@ function MapLocationInit(mapId, options = {}) {
     L.control.locate({
         returnToPrevBounds: true,
         showPopup: false,
+        ...(options.locate || {})
     }).addTo(map);
 
     function loadPos() {
