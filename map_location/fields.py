@@ -1,6 +1,8 @@
-from typing import NamedTuple
 from django.db import models
 from django.forms import Widget
+
+import json
+from typing import NamedTuple
 
 
 class Position(NamedTuple):
@@ -24,10 +26,11 @@ class MapLocationWidget(Widget):
               'leaflet/locate/L.Control.Locate.min.js',
               'map-location.js']
 
-    # def get_context(self, name, value, attrs):
-    #     context = super().get_context(name, value, attrs)
-    #     context['id'] = attrs.get('id')
-    #     return context
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context['map_options'] = json.dumps(
+            context['widget']['attrs'].get('options'))
+        return context
 
 
 class LocationField(models.Field):

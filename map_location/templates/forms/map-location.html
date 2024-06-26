@@ -3,6 +3,6 @@
   <div id="{{ widget.attrs.id }}_map" style="width: 100%; height: 400px"></div>
   <a href="" id="{{ widget.attrs.id }}_reset">Remove</a>
   <script>
-    MapLocationInit("{{ widget.attrs.id }}", {{ widget.attrs.options|safe }});
+    MapLocationInit("{{ widget.attrs.id }}", {{ map_options|safe }});
   </script>
 </div>
