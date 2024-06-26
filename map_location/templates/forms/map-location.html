@@ -1,0 +1,8 @@
+<div style="width: 100%">
+  <input name="{{ widget.name }}" id="{{ widget.attrs.id }}_value" type="hidden" value="{{ widget.value|default:'' }}"  />
+  <div id="{{ widget.attrs.id }}_map" style="width: 100%; height: 400px"></div>
+  <a href="" id="{{ widget.attrs.id }}_reset">Remove</a>
+  <script>
+    MapLocationInit("{{ widget.attrs.id }}", {{ widget.attrs.options|safe }});
+  </script>
+</div>

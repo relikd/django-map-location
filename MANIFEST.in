@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include map_location/static *
+recursive-include map_location/templates *
