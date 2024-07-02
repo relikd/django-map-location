@@ -14,11 +14,7 @@ function MapLocationInit(mapId, options = {}) {
         zoom: 2,
         ...(options.map || {})
     });
-    L.control.locate({
-        returnToPrevBounds: true,
-        showPopup: false,
-        ...(options.locate || {})
-    }).addTo(map);
+    L.control.locate({ showPopup: false, ...(options.locate || {}) }).addTo(map);
 
     function loadPos() {
         if (!valField.value) {

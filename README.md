@@ -33,7 +33,6 @@ class Place(models.Model):
         #     attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         # },
         # 'locate': {
-        #     'returnToPrevBounds': True,
         #     'showPopup': False,
         # },
     })
@@ -48,7 +47,7 @@ class Place(models.Model):
 | markerZoom  | Initial zoom scale (on load) – if a marker is set.  (default: `18`)
 | tileLayer   | [TileLayer](https://leafletjs.com/reference.html#tilelayer) urlTemplate (default: `"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"`)
 | tileOptions | [TileLayer Options](https://leafletjs.com/reference.html#tilelayer-option) (default: `{}`)
-| locate      | [Leaflet.Locate Options](https://github.com/domoritz/leaflet-locatecontrol#possible-options) (default: `{returnToPrevBounds: true, showPopup: false}`)
+| locate      | [Leaflet.Locate Options](https://github.com/domoritz/leaflet-locatecontrol#possible-options) (default: `{showPopup: false}`)
 
 
 ## Usage
