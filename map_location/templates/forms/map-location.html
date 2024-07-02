@@ -2,6 +2,7 @@
   <input name="{{ widget.name }}" id="{{id}}_value" type="hidden" value="{{ widget.value|default:'' }}"  />
   <div id="{{id}}_map" style="width: 100%; height: 400px"></div>
   <a href="" id="{{id}}_btn"></a>
+  <span id="{{id}}_disp" style="opacity: 0.5; margin-left: 1em"></span>
   <script>
     MapLocationInit("{{id}}", {{ map_options|safe }});
   </script>

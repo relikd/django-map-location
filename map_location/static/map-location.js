@@ -2,6 +2,7 @@ function MapLocationInit(mapId, options = {}) {
     const valField = document.getElementById(mapId + '_value');
     const theMap = document.getElementById(mapId + '_map');
     const btnAction = document.getElementById(mapId + '_btn');
+    const display = document.getElementById(mapId + '_disp');
 
     function isZero(latlng) {
         return latlng.lat === 0 && latlng.lng === 0;
@@ -32,6 +33,7 @@ function MapLocationInit(mapId, options = {}) {
     const marker = L.marker(loadPos(), { draggable: true });
     marker.on('move', function (e) {
         valField.value = asString(e.latlng);
+        updatePrint();
     });
     map.on('click', function (e) {
         if (isZero(marker.getLatLng())) {
@@ -53,7 +55,17 @@ function MapLocationInit(mapId, options = {}) {
         btnAction.innerText = initial ? 'Set center' : 'Reset';
     }
 
+    function updatePrint() {
+        const prefix = valField.value
+            ? ('pin: ' + valField.value)
+            : ('center: ' + asString(map.getCenter()));
+        display.innerText = prefix + ' zoom: ' + map.getZoom();
+    }
+    map.on('zoomend', updatePrint);
+    map.on('move', updatePrint);
+
     setMapState(isZero(marker.getLatLng()));
+    updatePrint();
 
     if (valField.value) {
         map.setView(valField.value.split(','), options.markerZoom || 18);
