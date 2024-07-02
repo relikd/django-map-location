@@ -4,6 +4,11 @@ Adds a fully-static location field (Leaflet) to manage location-based data witho
 
 ![screenshot](screenshot.jpg)
 
+Features: 
+- Click on map or drag&drop pin to select location
+- Reset button & use map-center button
+- Display selected location or map center coordinates with zoom level
+
 
 ## Install
 
