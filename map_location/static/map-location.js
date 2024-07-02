@@ -23,7 +23,7 @@ function MapLocationInit(mapId, options = {}) {
             return valField.value.split(',');
         }
     }
-    const marker = L.marker(loadPos(), { draggable: true }).addTo(map);
+    const marker = L.marker(loadPos(), { draggable: true });
     marker.on('move', function (e) {
         const pos = map.wrapLatLng(e.latlng);
         const flag = isZero(pos);
@@ -43,12 +43,12 @@ function MapLocationInit(mapId, options = {}) {
 
     function setMapState(initial) {
         theMap.style.cursor = initial ? 'crosshair' : null;
-        marker.setOpacity(initial ? 0 : 1);
+        initial ? marker.remove() : marker.addTo(map);
     }
 
-    if (isZero(marker.getLatLng())) {
-        setMapState(true);
-    } else {
+    setMapState(isZero(marker.getLatLng()));
+
+    if (valField.value) {
         map.setView(valField.value.split(','), options.markerZoom || 18);
     }
     // re-center map
