@@ -28,6 +28,7 @@ class MapLocationWidget(Widget):
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
+        context['id'] = context['widget']['attrs']['id']
         context['map_options'] = json.dumps(
             context['widget']['attrs'].get('options'))
         return context
