@@ -1,10 +1,16 @@
 function MapLocationInit(mapId, options = {}) {
     const valField = document.getElementById(mapId + '_value');
     const theMap = document.getElementById(mapId + '_map');
-    const resetButton = document.getElementById(mapId + '_reset');
+    const btnAction = document.getElementById(mapId + '_btn');
 
     function isZero(latlng) {
         return latlng.lat === 0 && latlng.lng === 0;
+    }
+
+    function asString(latlng) {
+        if (isZero(latlng)) { return ''; }
+        const pos = latlng.wrap();
+        return pos.lat.toFixed(6) + ',' + pos.lng.toFixed(6);
     }
 
     const osm = L.tileLayer(options.tileLayer || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', options.tileOptions);
@@ -25,9 +31,7 @@ function MapLocationInit(mapId, options = {}) {
     }
     const marker = L.marker(loadPos(), { draggable: true });
     marker.on('move', function (e) {
-        const pos = map.wrapLatLng(e.latlng);
-        const flag = isZero(pos);
-        valField.value = flag ? null : pos.lat.toFixed(6) + ',' + pos.lng.toFixed(6);
+        valField.value = asString(e.latlng);
     });
     map.on('click', function (e) {
         if (isZero(marker.getLatLng())) {
@@ -35,15 +39,18 @@ function MapLocationInit(mapId, options = {}) {
             setMapState(false);
         }
     });
-    resetButton.onclick = function () {
-        marker.setLatLng([0, 0]);
-        setMapState(true);
+    btnAction.onclick = function () {
+        const isReset = !!btnAction.dataset.reset;
+        marker.setLatLng(isReset ? [0, 0] : map.getCenter());
+        setMapState(isReset ? true : false);
         return false;
     };
 
     function setMapState(initial) {
         theMap.style.cursor = initial ? 'crosshair' : null;
         initial ? marker.remove() : marker.addTo(map);
+        btnAction.dataset.reset = initial ? '' : '1';
+        btnAction.innerText = initial ? 'Set center' : 'Reset';
     }
 
     setMapState(isZero(marker.getLatLng()));
